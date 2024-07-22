@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <style>
+        /* Resetting default margin and padding */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        input {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>QR Code Generator</h1>
+        <form action="/generate_qr" method="post">
+            <label for="url">Enter URL:</label><br>
+            <input type="text" id="url" name="url" required><br><br>
+
+            <label for="color">Choose QR Code Color:</label><br>
+            <input type="color" id="color" name="color" value="#0860a1" required><br><br>
+
+            <input type="submit" value="Generate QR Code">
+        </form>
+    </div>
+</body>
+</html>
