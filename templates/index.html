@@ -7,114 +7,92 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
-        body {
-            background-color: #FFF;
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            padding: 2rem;
-            max-width: 400px;
+        .container-s {
             width: 80%;
-            margin-left: auto;
-            margin-right: auto;
-            border: 1px solid #333;
         }
-        h1 {
-            font-weight: 900;
-            margin-bottom: 1.5rem;
-            text-align: left;
-        }
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding-top: 0.65rem;
-            padding-bottom: 0.65rem;
-            border-radius: 0;
-            border: 1px solid #333;
-        }
-        input[type="submit"] {
-            width: 100%;
-            padding: 0.5rem;
-            border: none;
-            background-color: #000000;
-            color: #FFF;
-            cursor: pointer;
-        }
-        .color-options {
-            display: flex;
-            margin-bottom: 1rem;
-        }
+
         .color-box {
-            width: 40px;
-            height: 40px;
             cursor: pointer;
-            margin-right: 0.5rem;
-        }
-        .color-box.bg-black { background-color: #000000; }
-        .color-box.bg-red { background-color: #FF0000; }
-        .color-box.bg-green { background-color: #008000; }
-        .color-box.bg-blue { background-color: #0000FF; }
-        .color-box.bg-purple { background-color: #800080; }
-        
-        @media (max-width: 600px) {
-            .container {
-                padding: 1rem;
-            }
-            .color-box {
-                width: 30px;
-                height: 30px;
-                margin-right: 0.3rem;
-            }
-            .form-group input[type="text"], 
-            .form-group input[type="submit"] {
-                padding-top: 0.25rem;
-                padding-bottom: 0.25rem;
-            }
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>QR Code Generator</h1>
-        <form action="/generate_qr" method="post">
-            <div class="form-group">
-                <label for="url">Enter URL:</label>
-                <input type="text" id="url" name="url" required>
+<body class="bg-[#f5f5f5] text-[#333] mx-auto font-['Inter']">
+    <header class="bg-white shadow-md p-4">
+        <nav class="container mx-auto flex items-center justify-between">
+            <a href="#" class="text-2xl font-bold text-black hover:underline">QR CODE GENERATOR</a>
+        </nav>
+    </header>
+    <main>
+        <section id="home" class="container-s mx-auto flex flex-col md:flex-row items-center justify-center pt-16">
+            <div class="md:w-1/2">
+                <!-- <img src="{{ url_for('static', filename='images/logo.png') }}" alt="QR Code Logo" class="w-full h-auto"> -->
+                <h2 class="text-3xl font-bold mb-4">What is a QR Code?</h2>
+                <p class="text-lg mb-2">
+                    A QR Code (Quick Response Code) is a versatile and high-capacity two-dimensional barcode that can store a wealth of information. Unlike traditional barcodes, QR codes can be scanned from any angle and hold more data, making them an ideal tool for a wide range of applications.
+                </p>
             </div>
+            <div class="md:w-1/2 p-6">
+                <!-- <h2 class="text-3xl font-bold mb-4">What is a QR Code?</h2>
+                <p class="text-lg mb-2">
+                    A QR Code (Quick Response Code) is a versatile and high-capacity two-dimensional barcode that can store a wealth of information. Unlike traditional barcodes, QR codes can be scanned from any angle and hold more data, making them an ideal tool for a wide range of applications.
+                </p> -->
+            </div>
+        </section> 
 
-            <div class="form-group">
-                <label for="color">Choose QR Code Color:</label>
-                <div class="color-options">
-                    <div class="color-box bg-black" onclick="setColor('#000000')"></div>
-                    <div class="color-box bg-red" onclick="setColor('#FF0000')"></div>
-                    <div class="color-box bg-green" onclick="setColor('#008000')"></div>
-                    <div class="color-box bg-blue" onclick="setColor('#0000FF')"></div>
-                    <div class="color-box bg-purple" onclick="setColor('#800080')"></div>
+        <section class="pt-16 container-s mx-auto">
+            <form action="/generate_qr" class="bg-white p-8 rounded-lg shadow-md md:max-w-lg" method="post">
+                <h2 class="text-3xl font-bold mb-8">Generate QR</h2>
+                <div class="mb-4">
+                    <input type="text" class="p-3 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" id="url" name="url" placeholder="Enter URL" required>
                 </div>
-                <input type="text" id="color" name="color" value="#000000" required>
-            </div>
+                <div class="mb-6">
+                    <div class="flex mb-4 items-center">
+                        <div class="color-box px-3 py-2 mr-2 text-sm rounded-xl bg-black text-white text-center" onclick="setColor('#000000')">Black</div>
+                        <div class="color-box px-3 py-2 mr-2 text-sm rounded-xl bg-red-700 text-white text-center cursor-pointer" onclick="setColor('#FF0000')">Red</div>
+                        <div class="color-box px-3 py-2 mr-2 text-sm rounded-xl bg-green-700 text-white text-center cursor-pointer" onclick="setColor('#008000')">Green</div>
+                        <div class="color-box px-3 py-2 mr-2 text-sm rounded-xl bg-blue-700 text-white text-center cursor-pointer" onclick="setColor('#0000FF')">Blue</div>
+                        <!-- <div class="color-box px-3 py-2 rounded-xl bg-purple-700 text-white text-center cursor-pointer" onclick="setColor('#800080')">Purple</div> -->
+                    </div>
+                    <input type="text" class="p-3 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" id="color" name="color" value="#000000" required>
+                </div>
+                <button type="submit" class="w-full p-3 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700">Generate QR Code</button>
+            </form>        
+        </section>
 
-            <input type="submit" value="Generate QR Code">
-        </form>
-    </div>
+        <section id="why-use" class="container-s mx-auto pt-16">
+            <h2 class="text-3xl font-bold mb-8">Why Use QR Codes?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">Instant Access</h3>
+                    <p class="text-gray-700">QR codes can link to websites, social media profiles, contact information, and more. Simply scan the code with your smartphone, and you’re instantly connected.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">Versatile Data Storage</h3>
+                    <p class="text-gray-700">Whether you want to share a URL, a text message, or even a Wi-Fi network login, QR codes can handle it all.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">Marketing and Branding</h3>
+                    <p class="text-gray-700">Enhance your marketing campaigns with custom QR codes that lead to promotions, special offers, or your brand’s online presence.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">Convenience</h3>
+                    <p class="text-gray-700">QR codes streamline processes by eliminating the need for manual entry. They are widely used in payments, ticketing, and inventory management.</p>
+                </div>
+            </div>
+        </section>
+            
+        <footer class="mt-16 bg-white">
+            <p class="text-center p-8"><a href="https://saumil8200.github.io/" target="_blank" class="font-bold text-indigo-700">SAUMIL SHAH</a></p>
+        </footer>
+    </main>
 
     <script>
         function setColor(color) {
             document.getElementById('color').value = color;
+            console.log("Selected color:", color);
         }
     </script>
 </body>
